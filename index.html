@@ -1,36 +1,466 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aerokleaners NGO</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aerokleaners — Clean. Green. Together.</title>
+  <meta name="description" content="Aerokleaners NGO — student-led community clean-ups, education, and sustainability projects." />
+  <!-- Icons (inline SVG sprites later) -->
+  <style>
+  /* ==========================
+     Aerokleaners — single-file beautiful responsive site
+     Author: ChatGPT (starter template)
+     Notes: Copy this file as index.html, upload to GitHub, publish with GitHub Pages.
+     ========================== */
+
+  :root{
+    --bg:#f6fbf9;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --accent:#0ea5a4; /* teal */
+    --accent-2:#047857; /* deeper */
+    --glass: rgba(255,255,255,0.6);
+    --shadow: 0 10px 25px rgba(2,6,23,0.08);
+    --radius: 14px;
+    --max-width:1200px;
+    --ff-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;font-family:var(--ff-sans);background:linear-gradient(180deg,var(--bg),#eef7f6);color:#0f172a;line-height:1.45;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;padding-bottom:6rem;
+  }
+
+  /* Container */
+  .wrap{width:94%;max-width:var(--max-width);margin:0 auto}
+
+  /* NAVBAR */
+  header.site-header{position:sticky;top:12px;z-index:60}
+  .nav-shell{display:flex;align-items:center;justify-content:space-between;padding:0.65rem;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.4));box-shadow:var(--shadow);backdrop-filter:blur(6px)}
+  .brand{display:flex;gap:0.75rem;align-items:center}
+  .logo{height:46px;width:46px;border-radius:10px;padding:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.05rem}
+  .brand h1{font-size:1.05rem;margin:0}
+  nav.main-nav{display:flex;gap:0.6rem;align-items:center}
+  nav.main-nav a{padding:0.55rem 0.6rem;border-radius:10px;color:var(--accent-2);text-decoration:none;font-weight:600}
+  nav.main-nav a:hover, nav.main-nav a.active{background:rgba(6,95,84,0.07)}
+  .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:0.5rem 0.9rem;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+  .hamburger{display:none;background:none;border:0;font-size:1.25rem}
+
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1fr 420px;gap:1.2rem;align-items:center;padding:3.5rem 0}
+  .hero-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:2.1rem}
+  .tag{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:.35rem .7rem;border-radius:999px;font-weight:700;font-size:.85rem}
+  .hero h2{font-size:2.2rem;margin:.6rem 0 0.6rem}
+  .lead{color:var(--muted);margin-bottom:1rem}
+  .hero-actions{display:flex;gap:0.75rem;margin-top:1rem}
+  .btn-outline{border:2px solid var(--accent-2);padding:.6rem .9rem;border-radius:10px;background:transparent;color:var(--accent-2);font-weight:700}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),#06b6a4);padding:.7rem 1rem;border-radius:12px;color:#fff;border:0;font-weight:800}
+
+  /* STAT CARDS */
+  .stats{display:flex;gap:0.8rem;margin-top:1.2rem}
+  .stat{flex:1;background:linear-gradient(180deg,#ffffff,rgba(255,255,255,0.9));padding:0.8rem;border-radius:12px;text-align:center}
+  .stat h3{margin:0;color:var(--accent-2)}
+  .stat p{margin:.35rem 0 0;color:var(--muted);font-weight:700}
+
+  /* RIGHT SIDE - image grid */
+  .mosaic{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem}
+  .mosaic img{width:100%;height:140px;object-fit:cover;border-radius:10px}
+  .mosaic .big{grid-column:1/-1;height:220px}
+
+  /* ABOUT & PROJECTS */
+  .section{padding:2.75rem 0}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .card{background:var(--card);border-radius:12px;padding:1rem;box-shadow:var(--shadow);min-height:160px}
+  .card h4{margin:0 0 .4rem}
+  .card p{color:var(--muted);font-size:.95rem}
+
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem}
+  .gallery img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+
+  /* VOLUNTEER FORM */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+  label{display:block;font-weight:700;margin-bottom:.35rem}
+  input,textarea,select{width:100%;padding:.6rem;border-radius:8px;border:1px solid #e6eef0;font-size:.95rem}
+  textarea{min-height:120px}
+  .form-foot{display:flex;justify-content:space-between;align-items:center;margin-top:.85rem}
+
+  /* FOOTER */
+  footer.site-footer{margin-top:2.25rem;padding:2rem;background:linear-gradient(180deg,#0f172a,#062f2e);color:#d1f5f3;border-radius:14px}
+  .footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  .social{display:flex;gap:.6rem;align-items:center}
+  .social a{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem;border-radius:8px;background:rgba(255,255,255,0.06);color:#d4fff8}
+
+  /* small utilities */
+  .muted{color:var(--muted)}
+  .center{text-align:center}
+  .shadow-sm{box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+
+  /* ANIMATIONS */
+  .fade-up{opacity:0;transform:translateY(10px);animation:fadeUp 800ms ease forwards}
+  @keyframes fadeUp{to{opacity:1;transform:none}}
+
+  /* RESPONSIVE */
+  @media(max-width:1000px){
+    .hero{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .cards{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:680px){
+    nav.main-nav{display:none}
+    .hamburger{display:inline-block}
+    .nav-shell{padding:.6rem}
+    .mosaic img{height:100px}
+    .gallery img{height:120px}
+    .cards{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+  }
+
+  /* Accessibility focus */
+  a:focus,button:focus,input:focus,textarea:focus{outline:3px solid rgba(14,165,164,0.18);outline-offset:3px}
+
+  /* Decorative wave */
+  .wave{width:100%;height:120px;margin-top:-40px}
+  </style>
+  <!-- Inline SVG sprite (icons) -->
+  <svg style="display:none">
+    <symbol id="icon-map" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.5 2.5 13.93 2.5 3a1 1 0 011-1H7a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.01l-2.71 2.21z"></path></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></symbol>
+  </svg>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1 class="logo">Aerokleaners</h1>
-      <nav id="navbar">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <button class="nav-toggle" aria-label="toggle navigation">&#9776;</button>
-    </div>
-  </header>
+  <div class="wrap">
+    <!-- Header/Nav -->
+    <header class="site-header">
+      <div class="nav-shell">
+        <div class="brand">
+          <div class="logo" aria-hidden>AK</div>
+          <div>
+            <h1 style="font-size:1rem;margin:0">Aerokleaners</h1>
+            <div style="font-size:.8rem;color:var(--muted)">Clean. Green. Together.</div>
+          </div>
+        </div>
 
-  <section class="hero">
-    <div class="container">
-      <h2>Cleaning the Earth, One Step at a Time</h2>
-      <p>Join our student-led drives to make the planet cleaner and greener.</p>
-    </div>
-  </section>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#home" class="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#volunteer">Volunteer</a>
+          <a href="#contact">Contact</a>
+        </nav>
 
-  <footer>
-    &copy; 2025 Aerokleaners NGO
-  </footer>
+        <div style="display:flex;gap:.6rem;align-items:center">
+          <button class="cta" id="donateBtn">Join Us</button>
+          <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">☰</button>
+        </div>
+      </div>
+    </header>
 
-  <script src="script.js"></script>
+    <!-- HERO -->
+    <main id="home" style="margin-top:1rem">
+      <section class="hero">
+        <div class="hero-card fade-up" style="--delay:0ms">
+          <span class="tag">Student-led NGO</span>
+          <h2>We organize clean-up drives, tree plantations, and environmental education in schools</h2>
+          <p class="lead">Aerokleaners brings students together to take small, measurable steps that create a cleaner, greener campus and neighbourhood.</p>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="location.href='#volunteer'">Volunteer</button>
+            <button class="btn-outline" onclick="location.href='#projects'">Our Projects</button>
+          </div>
+
+          <div class="stats" aria-hidden>
+            <div class="stat"><h3>120+</h3><p>Volunteers trained</p></div>
+            <div class="stat"><h3>35</h3><p>Drives organised</p></div>
+            <div class="stat"><h3>500kg</h3><p>Waste collected</p></div>
+          </div>
+        </div>
+
+        <aside class="mosaic">
+          <img src="https://images.unsplash.com/photo-1520975915375-1fbe6e7b2b9d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="clean-up 1" class="big" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="group" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1520975915375-1fbe6e7b2b9d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="planting" loading="lazy">
+        </aside>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="section">
+        <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap">
+          <div style="flex:1;min-width:280px">
+            <h3>About Aerokleaners</h3>
+            <p class="muted">Founded by students, Aerokleaners focuses on practical environmental actions combined with awareness campaigns in schools. Our programs are low-cost, high-impact, and replicable.</p>
+
+            <div style="margin-top:1rem" class="cards">
+              <div class="card">
+                <h4>Education</h4>
+                <p>Workshops and classroom talks designed for students (age 10–18) to teach waste segregation and sustainable habits.</p>
+              </div>
+              <div class="card">
+                <h4>Clean-up Drives</h4>
+                <p>Organized, safe drives focusing on parks, school campuses, and local streets where students can participate under supervision.</p>
+              </div>
+              <div class="card">
+                <h4>Green Projects</h4>
+                <p>Tree plantation, composting pits, and small urban gardening projects to improve biodiversity on campus.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="width:360px;min-width:260px">
+            <div class="card shadow-sm">
+              <h4>Why join?</h4>
+              <p class="muted">Hands-on experience, leadership opportunities, certificates for volunteers, and measurable improvements in local environment.</p>
+              <ul style="margin-top:.6rem;color:var(--muted);padding-left:1rem">
+                <li>Learn teamwork & leadership</li>
+                <li>Earn volunteer hours</li>
+                <li>Make your school greener</li>
+              </ul>
+              <div style="margin-top:1rem;display:flex;gap:.6rem">
+                <button class="btn-primary" onclick="location.href='#volunteer'">Sign Up</button>
+                <button class="btn-outline" onclick="openDonate()">Donate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="section">
+        <h3>Recent Projects</h3>
+        <div class="cards" style="margin-top:1rem">
+          <article class="card">
+            <h4>Beach Cleanup — August 2025</h4>
+            <p class="muted">Over 60 volunteers collected 150kg of plastic and sorted recyclables. Local partners provided collection and compost bins.</p>
+          </article>
+          <article class="card">
+            <h4>Tree Planting Drive — March 2025</h4>
+            <p class="muted">We planted 120 saplings in collaboration with school environmental club and local nursery.</p>
+          </article>
+          <article class="card">
+            <h4>Composting Workshop — May 2025</h4>
+            <p class="muted">Students learned to build low-cost compost pits and kitchen waste segregation for school canteens.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section id="gallery" class="section">
+        <h3>Gallery</h3>
+        <div class="gallery" style="margin-top:1rem">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 1" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1520975915375-1fbe6e7b2b9d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 2" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 3" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 4" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 5" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1473186505569-9c61870c11f9?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 6" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 7" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1520975915375-1fbe6e7b2b9d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="gallery 8" loading="lazy">
+        </div>
+      </section>
+
+      <!-- VOLUNTEER FORM -->
+      <section id="volunteer" class="section">
+        <h3>Volunteer</h3>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <form class="hero-card" style="flex:1;min-width:320px;" id="volForm" action="https://formspree.io/f/yourformid" method="POST">
+            <!-- Replace formspree endpoint with your own or your preferred form handler -->
+            <div class="form-grid">
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" required />
+              </div>
+              <div>
+                <label for="age">Age</label>
+                <input id="age" name="age" type="number" min="8" max="120" />
+              </div>
+              <div>
+                <label for="school">School / Institution</label>
+                <input id="school" name="school" type="text" />
+              </div>
+              <div>
+                <label for="role">Volunteer role</label>
+                <select id="role" name="role">
+                  <option>Participant</option>
+                  <option>Team Leader</option>
+                  <option>Media & Outreach</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top:.6rem">
+              <label for="notes">Why do you want to volunteer?</label>
+              <textarea id="notes" name="notes" placeholder="Tell us a bit..."> </textarea>
+            </div>
+            <div class="form-foot">
+              <small class="muted">We will never share your details publicly.</small>
+              <div style="display:flex;gap:.5rem">
+                <button class="btn-outline" type="reset">Reset</button>
+                <button class="btn-primary" type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+
+          <aside style="width:320px;min-width:260px">
+            <div class="card">
+              <h4>Volunteer Guide</h4>
+              <p class="muted">What to bring: gloves, caps, water bottle. We provide gloves, first-aid, and collection bags. Parents must sign consent for volunteers under 18.</p>
+              <ul style="margin-top:.5rem;color:var(--muted);padding-left:1rem">
+                <li>Arrival 30 minutes early</li>
+                <li>Wear comfortable shoes</li>
+                <li>Follow safety instructions</li>
+              </ul>
+            </div>
+            <div style="height:12px"></div>
+            <div class="card">
+              <h4>Impact Tracker</h4>
+              <p class="muted">Keep a small record of volunteers and weights collected — we update our metrics after every drive.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section">
+        <h3>Contact</h3>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <address class="card" style="flex:1;min-width:260px">
+            <strong>Aerokleaners</strong>
+            <p class="muted">School Environmental Initiative, India</p>
+            <div style="display:flex;gap:.6rem;margin-top:.6rem;flex-wrap:wrap">
+              <a href="mailto:hello@aerokleaners.org" style="display:inline-flex;align-items:center;gap:.4rem"><svg width="16" height="16"><use href="#icon-mail"/></svg> hello@aerokleaners.org</a>
+              <a href="tel:+911234567890" style="display:inline-flex;align-items:center;gap:.4rem"><svg width="16" height="16"><use href="#icon-phone"/></svg> +91 12345 67890</a>
+            </div>
+          </address>
+
+          <div style="flex:1;min-width:260px" class="card">
+            <h4>Send a message</h4>
+            <form id="msgForm" onsubmit="submitMessage(event)">
+              <label for="mname">Name</label>
+              <input id="mname" required />
+              <label for="memail">Email</label>
+              <input id="memail" type="email" required />
+              <label for="mmsg">Message</label>
+              <textarea id="mmsg" required></textarea>
+              <div style="margin-top:.6rem;display:flex;justify-content:flex-end">
+                <button class="btn-primary" type="submit">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="wrap">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap">
+          <div style="max-width:420px">
+            <h3 style="margin:0;color:white">Aerokleaners</h3>
+            <p class="muted" style="color:#d1f5f3">Student-led environmental action — workshops, drives and green projects in your neighbourhood and school.</p>
+            <div style="margin-top:1rem" class="social">
+              <a href="#">Twitter</a>
+              <a href="#">Instagram</a>
+              <a href="#">Facebook</a>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <div style="min-width:160px">
+              <h4 style="margin:0;color:#bfeee8">Quick Links</h4>
+              <ul style="list-style:none;padding-left:0;margin-top:.6rem;color:#d1f5f3">
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#volunteer">Volunteer</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div style="min-width:160px">
+              <h4 style="margin:0;color:#bfeee8">Support</h4>
+              <ul style="list-style:none;padding-left:0;margin-top:.6rem;color:#d1f5f3">
+                <li><a href="#">Donate</a></li>
+                <li><a href="#">Partner</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.25rem;border-top:1px solid rgba(255,255,255,0.06);padding-top:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <small style="color:#bfeee8">© 2025 Aerokleaners. All rights reserved.</small>
+          <small style="color:#bfeee8">Design: Aerokleaners • Built with ❤️</small>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+  /* ====================
+     Interactive JS (kept small and dependency-free)
+     - mobile menu
+     - simple form handling demo (no backend)
+     - small UI helpers
+     ====================*/
+
+  // mobile menu
+  const hamburger = document.getElementById('hamburgerBtn');
+  const nav = document.querySelector('nav.main-nav');
+  hamburger.addEventListener('click', ()=>{
+    nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
+    nav.classList.toggle('mobile-open');
+  });
+
+  // donate placeholder
+  function openDonate(){
+    alert('Thanks for your interest! For this demo, please contact hello@aerokleaners.org to donate.');
+  }
+
+  // volunteer form demo handler (prevents actual submission to Formspree in this local demo)
+  const volForm = document.getElementById('volForm');
+  volForm.addEventListener('submit', function(e){
+    // if action unchanged, show a preview modal (simple alert)
+    if(volForm.action.includes('yourformid')){
+      e.preventDefault();
+      const name = document.getElementById('name').value || 'friend';
+      alert('Thanks, ' + name + '! Your interest has been noted. Replace the form action with your Formspree or backend endpoint to collect responses.');
+      volForm.reset();
+    }
+  });
+
+  // simple message form
+  function submitMessage(e){
+    e.preventDefault();
+    const n = document.getElementById('mname').value;
+    const em = document.getElementById('memail').value;
+    const msg = document.getElementById('mmsg').value;
+    if(n && em && msg){
+      alert('Message sent. Thank you, ' + n + '! (This is a demo — wire to an email service to actually send)');
+      document.getElementById('msgForm').reset();
+    } else {
+      alert('Please fill all fields.');
+    }
+  }
+
+  // simple fade-up triggers
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const els = document.querySelectorAll('.fade-up');
+    els.forEach((el,i)=>{
+      el.style.animationDelay = (i*120) + 'ms';
+    });
+  });
+
+  // smooth scroll for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const href = this.getAttribute('href');
+      if(href.length>1){
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+  </script>
 </body>
 </html>
